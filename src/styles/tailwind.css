@@ -1,0 +1,139 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Custom CSS Variables */
+:root {
+  /* Primary Colors */
+  --color-primary-50: #eff6ff; /* blue-50 */
+  --color-primary-100: #dbeafe; /* blue-100 */
+  --color-primary-200: #bfdbfe; /* blue-200 */
+  --color-primary-300: #93c5fd; /* blue-300 */
+  --color-primary-400: #60a5fa; /* blue-400 */
+  --color-primary-500: #3b82f6; /* blue-500 */
+  --color-primary-600: #2563eb; /* blue-600 */
+  --color-primary-700: #1d4ed8; /* blue-700 */
+  --color-primary-800: #1e40af; /* blue-800 */
+  --color-primary-900: #1e3a8a; /* blue-900 */
+
+  /* Neutral Colors */
+  --color-neutral-50: #f8fafc; /* slate-50 */
+  --color-neutral-100: #f1f5f9; /* slate-100 */
+  --color-neutral-200: #e2e8f0; /* slate-200 */
+  --color-neutral-300: #cbd5e1; /* slate-300 */
+  --color-neutral-400: #94a3b8; /* slate-400 */
+  --color-neutral-500: #64748b; /* slate-500 */
+  --color-neutral-600: #475569; /* slate-600 */
+  --color-neutral-700: #334155; /* slate-700 */
+  --color-neutral-800: #1e293b; /* slate-800 */
+  --color-neutral-900: #0f172a; /* slate-900 */
+
+  /* Semantic Colors */
+  --color-success-500: #10b981; /* emerald-500 */
+  --color-success-600: #059669; /* emerald-600 */
+  --color-warning-500: #f59e0b; /* amber-500 */
+  --color-warning-600: #d97706; /* amber-600 */
+  --color-error-500: #ef4444; /* red-500 */
+  --color-error-600: #dc2626; /* red-600 */
+  --color-info-500: #0ea5e9; /* sky-500 */
+  --color-info-600: #0284c7; /* sky-600 */
+  --color-oil-500: #92400e; /* amber-800 */
+  --color-gas-500: #b91c1c; /* red-700 */
+  --color-water-500: #0891b2; /* cyan-600 */
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-neutral-50 text-neutral-900;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+  
+  code, pre {
+    @apply font-mono;
+  }
+}
+
+@layer components {
+  /* Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+  
+  .btn-secondary {
+    @apply bg-neutral-200 text-neutral-800 hover:bg-neutral-300 focus:ring-neutral-500;
+  }
+  
+  .btn-tertiary {
+    @apply text-primary-600 hover:text-primary-700 focus:ring-primary-500;
+  }
+  
+  .btn-danger {
+    @apply bg-error-500 text-white hover:bg-error-600 focus:ring-error-500;
+  }
+  
+  .btn-success {
+    @apply bg-success-500 text-white hover:bg-success-600 focus:ring-success-500;
+  }
+  
+  .btn-icon {
+    @apply p-2 rounded-full;
+  }
+  
+  /* Input Styles */
+  .input {
+    @apply block w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-neutral-900 placeholder-neutral-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 disabled:opacity-50 disabled:bg-neutral-100;
+  }
+  
+  .input-error {
+    @apply border-error-500 focus:border-error-500 focus:ring-error-500;
+  }
+  
+  .input-success {
+    @apply border-success-500 focus:border-success-500 focus:ring-success-500;
+  }
+  
+  /* Card Styles */
+  .card {
+    @apply bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden;
+  }
+  
+  .card-header {
+    @apply px-6 py-4 border-b border-neutral-200;
+  }
+  
+  .card-body {
+    @apply p-6;
+  }
+  
+  .card-footer {
+    @apply px-6 py-4 border-t border-neutral-200;
+  }
+  
+  /* Dropdown Styles */
+  .dropdown {
+    @apply relative inline-block;
+  }
+  
+  .dropdown-content {
+    @apply absolute z-10 mt-1 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+  }
+  
+  .dropdown-item {
+    @apply block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100 cursor-pointer;
+  }
+}
