@@ -8,6 +8,7 @@ import LoginHeader from "./components/LoginHeader";
 import LoginFooter from "./components/LoginFooter";
 import LoginSidebar from "./components/LoginSidebar";
 import AuthOptions from "./components/AuthOptions";
+import { Navigator } from "components/helpers/Navigator";
 
 const LoginAuthentication = () => {
   const navigate = useNavigate();
@@ -37,6 +38,8 @@ const LoginAuthentication = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-neutral-50">
+
+    <Navigator />
       {/* Left sidebar with background image and info */}
       <LoginSidebar />
       

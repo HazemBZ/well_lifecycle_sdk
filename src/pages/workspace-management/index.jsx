@@ -10,6 +10,7 @@ import WorkspaceList from "./components/WorkspaceList";
 import CreateWorkspaceModal from "./components/CreateWorkspaceModal";
 import FilterPanel from "./components/FilterPanel";
 import RecentActivity from "./components/RecentActivity";
+import { sortOptions, user } from "./workspaceMockData";
 
 const WorkspaceManagement = () => {
   const [viewMode, setViewMode] = useState("grid");
@@ -18,22 +19,7 @@ const WorkspaceManagement = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Mock user data
-  const user = {
-    name: "Alex Johnson",
-    email: "alex.johnson@petrodigital.com",
-    initials: "AJ",
-    role: "Petroleum Engineer",
-  };
-
-  // Sort options
-  const sortOptions = [
-    { value: "recent", label: "Recently Modified" },
-    { value: "name", label: "Name (A-Z)" },
-    { value: "created", label: "Date Created" },
-    { value: "popular", label: "Most Used" },
-  ];
-
+  
   // Handle search
   const handleSearch = (query) => {
     setSearchQuery(query);

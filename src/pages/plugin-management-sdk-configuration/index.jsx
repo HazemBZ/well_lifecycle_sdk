@@ -11,19 +11,12 @@ import SDKConfiguration from "./components/SDKConfiguration";
 import PluginPermissions from "./components/PluginPermissions";
 import SystemHealth from "./components/SystemHealth";
 import AuditLog from "./components/AuditLog";
+import { user } from "./pluginManagementMockData";
 
 const PluginManagementSDKConfiguration = () => {
   const [activeTab, setActiveTab] = useState("installed");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
-  // Mock user data
-  const user = {
-    name: "John Doe",
-    email: "john.doe@petrodigital.com",
-    initials: "JD",
-    role: "Administrator"
-  };
 
   // Handle search
   const handleSearch = (query) => {
