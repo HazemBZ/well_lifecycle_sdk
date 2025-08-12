@@ -16,6 +16,30 @@ export default defineConfig({
     port: "4028",
     host: "0.0.0.0",
     strictPort: true,
-    allowedHosts: ['.amazonaws.com', '.builtwithrocket.new']
-  }
+    cors: true,
+    // cors: {
+    //   allowedHeaders: "*",
+    //   origin: "*",
+    //   // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    //   methods: "*",
+    //   credentials: false,
+    //   exposedHeaders: ["Content-Length", "X-JSON"],
+    //   optionsSuccessStatus: 204, // some legacy browsers (IE11, various
+    //   preflightContinue: true,
+    // },
+    allowedHosts: true
+    // proxy: {
+    //   "/api": {
+    //     target: "http://localhost:3000",
+    //     secure: false,
+    //     changeOrigin: true,
+    //     rewrite: (path) => {
+    //       console.log(path);
+    //       // return path.replace(/^\/api/, "");
+    //       return path
+    //     },
+    //   },
+    // },
+    // allowedHosts: [".amazonaws.com", ".builtwithrocket.new", "*"],
+  },
 });
