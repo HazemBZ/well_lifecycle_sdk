@@ -29,43 +29,28 @@ const PluginManagementSDKConfiguration = () => {
   };
 
   return (
-    <div className="flex h-screen bg-neutral-50">
-      {/* Sidebar */}
-      <Sidebar 
-        variant={sidebarCollapsed ? "collapsed" : "expanded"} 
-        onToggle={handleSidebarToggle} 
-      />
-
+    <>
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header */}
-        <Header 
-          user={user}
-          onSearch={handleSearch}
-        />
-
         {/* Page content */}
         <main className="flex-1 overflow-y-auto p-6">
           <div className="max-w-7xl mx-auto">
             {/* Page header */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
               <div>
-                <h1 className="text-2xl font-semibold text-neutral-900">Plugin Management & SDK Configuration</h1>
+                <h1 className="text-2xl font-semibold text-neutral-900">
+                  Plugin Management & SDK Configuration
+                </h1>
                 <p className="mt-1 text-sm text-neutral-500">
-                  Manage plugins and configure the SDK settings for your platform
+                  Manage plugins and configure the SDK settings for your
+                  platform
                 </p>
               </div>
               <div className="mt-4 md:mt-0 flex space-x-3">
-                <Button 
-                  variant="primary" 
-                  icon="Upload"
-                >
+                <Button variant="primary" icon="Upload">
                   Upload Plugin
                 </Button>
-                <Button 
-                  variant="secondary" 
-                  icon="RefreshCw"
-                >
+                <Button variant="secondary" icon="RefreshCw">
                   Refresh
                 </Button>
               </div>
@@ -76,7 +61,9 @@ const PluginManagementSDKConfiguration = () => {
               <nav className="-mb-px flex space-x-8">
                 <button
                   className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === "installed" ?"border-primary-500 text-primary-600" :"border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
+                    activeTab === "installed"
+                      ? "border-primary-500 text-primary-600"
+                      : "border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
                   }`}
                   onClick={() => setActiveTab("installed")}
                 >
@@ -84,7 +71,9 @@ const PluginManagementSDKConfiguration = () => {
                 </button>
                 <button
                   className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === "available" ?"border-primary-500 text-primary-600" :"border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
+                    activeTab === "available"
+                      ? "border-primary-500 text-primary-600"
+                      : "border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
                   }`}
                   onClick={() => setActiveTab("available")}
                 >
@@ -92,7 +81,9 @@ const PluginManagementSDKConfiguration = () => {
                 </button>
                 <button
                   className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === "configuration" ?"border-primary-500 text-primary-600" :"border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
+                    activeTab === "configuration"
+                      ? "border-primary-500 text-primary-600"
+                      : "border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
                   }`}
                   onClick={() => setActiveTab("configuration")}
                 >
@@ -100,7 +91,9 @@ const PluginManagementSDKConfiguration = () => {
                 </button>
                 <button
                   className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === "permissions" ?"border-primary-500 text-primary-600" :"border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
+                    activeTab === "permissions"
+                      ? "border-primary-500 text-primary-600"
+                      : "border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
                   }`}
                   onClick={() => setActiveTab("permissions")}
                 >
@@ -108,7 +101,9 @@ const PluginManagementSDKConfiguration = () => {
                 </button>
                 <button
                   className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === "health" ?"border-primary-500 text-primary-600" :"border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
+                    activeTab === "health"
+                      ? "border-primary-500 text-primary-600"
+                      : "border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
                   }`}
                   onClick={() => setActiveTab("health")}
                 >
@@ -116,7 +111,9 @@ const PluginManagementSDKConfiguration = () => {
                 </button>
                 <button
                   className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === "audit" ?"border-primary-500 text-primary-600" :"border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
+                    activeTab === "audit"
+                      ? "border-primary-500 text-primary-600"
+                      : "border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300"
                   }`}
                   onClick={() => setActiveTab("audit")}
                 >
@@ -136,26 +133,14 @@ const PluginManagementSDKConfiguration = () => {
                 />
               </div>
               <div className="flex space-x-3">
-                <Button 
-                  variant="ghost" 
-                  icon="Filter"
-                  size="sm"
-                >
+                <Button variant="ghost" icon="Filter" size="sm">
                   Filter
                 </Button>
-                <Button 
-                  variant="ghost" 
-                  icon="SortAsc"
-                  size="sm"
-                >
+                <Button variant="ghost" icon="SortAsc" size="sm">
                   Sort
                 </Button>
-                <Link to="/dashboard-project-overview">
-                  <Button 
-                    variant="ghost" 
-                    icon="ArrowLeft"
-                    size="sm"
-                  >
+                <Link to="/dashboard/home">
+                  <Button variant="ghost" icon="ArrowLeft" size="sm">
                     Back to Dashboard
                   </Button>
                 </Link>
@@ -164,8 +149,12 @@ const PluginManagementSDKConfiguration = () => {
 
             {/* Tab content */}
             <div className="bg-white rounded-lg shadow">
-              {activeTab === "installed" && <InstalledPlugins searchQuery={searchQuery} />}
-              {activeTab === "available" && <PluginDirectory searchQuery={searchQuery} />}
+              {activeTab === "installed" && (
+                <InstalledPlugins searchQuery={searchQuery} />
+              )}
+              {activeTab === "available" && (
+                <PluginDirectory searchQuery={searchQuery} />
+              )}
               {activeTab === "configuration" && <SDKConfiguration />}
               {activeTab === "permissions" && <PluginPermissions />}
               {activeTab === "health" && <SystemHealth />}
@@ -178,17 +167,33 @@ const PluginManagementSDKConfiguration = () => {
         <footer className="bg-white border-t border-neutral-200 py-4 px-6">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="text-sm text-neutral-500">
-              &copy; {new Date().getFullYear()} PetroDigital. All rights reserved.
+              &copy; {new Date().getFullYear()} PetroDigital. All rights
+              reserved.
             </div>
             <div className="mt-2 md:mt-0 flex space-x-4">
-              <a href="#" className="text-sm text-neutral-500 hover:text-neutral-700">Privacy Policy</a>
-              <a href="#" className="text-sm text-neutral-500 hover:text-neutral-700">Terms of Service</a>
-              <a href="#" className="text-sm text-neutral-500 hover:text-neutral-700">Contact Support</a>
+              <a
+                href="#"
+                className="text-sm text-neutral-500 hover:text-neutral-700"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#"
+                className="text-sm text-neutral-500 hover:text-neutral-700"
+              >
+                Terms of Service
+              </a>
+              <a
+                href="#"
+                className="text-sm text-neutral-500 hover:text-neutral-700"
+              >
+                Contact Support
+              </a>
             </div>
           </div>
         </footer>
       </div>
-    </div>
+    </>
   );
 };
 

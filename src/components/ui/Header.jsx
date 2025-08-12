@@ -20,15 +20,15 @@ const Header = ({
   
   // Navigation items
   const navigationItems = [
-    { name: 'Dashboard', path: '/dashboard-project-overview', icon: 'LayoutDashboard' },
-    { name: 'Projects', path: '/project-management-configuration', icon: 'Briefcase' },
-    { name: 'Workspace', path: '/workspace-management', icon: 'Layers' },
-    { name: 'Well Log Viewer', path: '/well-log-viewer-analysis', icon: 'LineChart' },
-    { name: 'Drilling Data', path: '/drilling-data-management', icon: 'Drill' },
-    { name: 'Production', path: '/production-data-analysis', icon: 'BarChart3' },
-    { name: 'Geology', path: '/geological-petrophysical-evaluation', icon: 'Mountain' },
-    { name: 'Well Trajectory', path: '/well-trajectory-survey-visualization', icon: 'Route' },
-    { name: 'Plugins', path: '/plugin-management-sdk-configuration', icon: 'Puzzle' },
+    // { name: 'Dashboard', path: '/dashboard/home', icon: 'LayoutDashboard' },
+    // { name: 'Projects', path: '/dashboard/projects', icon: 'Briefcase' },
+    // { name: 'Workspace', path: '/dashboard/workspaces', icon: 'Layers' },
+    // { name: 'Well Log Viewer', path: '/dashboard/well-log-viewer', icon: 'LineChart' },
+    // { name: 'Drilling Data', path: '/drilling-data-management', icon: 'Drill' },
+    // { name: 'Production', path: '/production-data-analysis', icon: 'BarChart3' },
+    // { name: 'Geology', path: '/geological-petrophysical-evaluation', icon: 'Mountain' },
+    // { name: 'Well Trajectory', path: '/well-trajectory-survey-visualization', icon: 'Route' },
+    // { name: 'Plugins', path: '/plugin-management-sdk-configuration', icon: 'Puzzle' },
   ];
   
   // Toggle user menu

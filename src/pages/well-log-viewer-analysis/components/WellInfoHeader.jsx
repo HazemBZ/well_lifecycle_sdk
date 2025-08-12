@@ -34,7 +34,7 @@ const WellInfoHeader = ({
       <div className="flex justify-between items-center mb-3">
         <div className="flex items-center">
           <Link
-            to="/dashboard-project-overview"
+            to="/dashboard/projects"
             className="mr-3 text-neutral-500 hover:text-neutral-700"
           >
             <Icon name="ArrowLeft" size={20} />

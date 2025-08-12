@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Icon from "../AppIcon";
-import { Navigator } from "components/helpers/Navigator";
 
 const Sidebar = ({
   variant = "expanded",
@@ -13,58 +12,59 @@ const Sidebar = ({
   const location = useLocation();
 
   // Navigation items
+  // TODO: Refactor layout and navigation
   const navigationItems = [
     {
       name: "Dashboard",
-      path: "/dashboard-project-overview",
+      path: "/dashboard/home",
       icon: "LayoutDashboard",
     },
     {
       name: "Projects",
-      path: "/project-management-configuration",
+      path: "/dashboard/projects",
       icon: "Briefcase",
       subItems: [
-        { name: "All Projects", path: "/project-management-configuration" },
-        { name: "Create New", path: "/project-management-configuration/new" },
+        { name: "All Projects", path: "/dashboard/projects" },
+        { name: "Create New", path: "/dashboard/projects/new" },
         {
           name: "Templates",
-          path: "/project-management-configuration/templates",
+          path: "/dashboard/projects/templates",
         },
       ],
     },
     {
       name: "Workspace",
-      path: "/workspace-management",
+      path: "/dashboard/workspaces",
       icon: "Layers",
     },
     {
       name: "Well Log Viewer",
-      path: "/well-log-viewer-analysis",
+      path: "/dashboard/well-log-viewer",
       icon: "LineChart",
     },
     {
       name: "Drilling Data",
-      path: "/drilling-data-management",
+      path: "/dashboard/drilling",
       icon: "Drill",
     },
     {
       name: "Production",
-      path: "/production-data-analysis",
+      path: "/dashboard/production",
       icon: "BarChart3",
     },
     {
       name: "Geology",
-      path: "/geological-petrophysical-evaluation",
+      path: "/dashboard/geology",
       icon: "Mountain",
     },
     {
       name: "Well Trajectory",
-      path: "/well-trajectory-survey-visualization",
+      path: "/dashboard/well-trajectory",
       icon: "Route",
     },
     {
       name: "Plugins",
-      path: "/plugin-management-sdk-configuration",
+      path: "/dashboard/plugins",
       icon: "Puzzle",
     },
   ];

@@ -28,7 +28,7 @@ const LoginAuthentication = () => {
     // Simulate API call
     setTimeout(() => {
       if (values.email === mockCredentials.email && values.password === mockCredentials.password) {
-        navigate("/dashboard-project-overview");
+        navigate("/dashboard/home");
       } else {
         setLoginError("Invalid email or password. Please try again.");
       }
