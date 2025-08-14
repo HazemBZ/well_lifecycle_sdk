@@ -32,7 +32,7 @@ const Routes = () => {
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="home" element={<DashboardProjectOverview />} />
             <Route
-              path="projects"
+              path="projects/*"
               element={<ProjectManagementConfiguration />}
             />
             <Route path="workspaces" element={<WorkspaceManagement />} />
