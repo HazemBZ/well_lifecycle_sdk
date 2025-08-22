@@ -223,6 +223,7 @@ const Dropdown = ({
                   className="w-full px-3 py-2 text-sm border border-neutral-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                   placeholder="Search..."
                   value={searchValue}
+                  name={name}
                   onChange={handleSearchChange}
                   onClick={(e) => e.stopPropagation()}
                 />
