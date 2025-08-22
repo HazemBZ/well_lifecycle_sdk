@@ -225,6 +225,7 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
       resampleStep,
       resampleType,
       interpolation,
+      members,
       ...restVaues
     },
     actions
@@ -245,7 +246,7 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
       list_path: JSON.stringify(paths),
       associated_files: JSON.stringify(Object.keys(associatedPaths)),
       unitSystem,
-      members: members.map(({ id, role }) => ({ id: id, role: role })),
+      members,
       resample: {
         resampleType,
         resampleStart,
@@ -331,6 +332,7 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
         resampleType: 'ORIGIN',
         interpolation: DEFAULT_RESAMPLING_CONFIG.interpolation,
         associated_files: {},
+        members, // TODO: Default to include logged-in user or project creator
       }}
       onSubmit={handleSubmission}
     >

@@ -3,11 +3,37 @@ import InputSearch from '../../../../components/ui/InputSearch'
 
 import { mockUsers, roleOptions } from '../TeamManagementTabOptions'
 import Button from 'components/ui/Button'
+import { useFormikContext } from 'formik'
 
 function MemberSelectionModal({ selectedUsers, setSelectedUsers, setShowAddUserModal, showAddUserModal }) {
   const [searchQuery, setSearchQuery] = useState('')
   const project = {}
 
+  const { values, setValues } = useFormikContext()
+
+
+  const toggleMemberSelection = user => {
+    const isSelected = selectedUsers.some(selectedUser => selectedUser.id === user.id)
+    if (isSelected) {
+      setSelectedUsers(selectedUsers.filter(selectedUser => selectedUser.id !== user.id))
+      setValues(prev=> ({
+        ...prev,
+        members: prev.members.filter(member => member.id !== user.id)}))
+    } else {
+      const newUser = {
+        ...user,
+        role: user.role || 'viewer',
+        projectRole: { value: 'viewer', label: 'Viewer', icon: 'Eye' },
+      }
+      setSelectedUsers([...selectedUsers, newUser])
+      setValues(prev=> ({
+        ...prev,
+        members: [...prev.members, newUser]}))
+      setShowAddUserModal(false)  
+    }
+  }
+
+  
   // Filter users based on search query
   const filteredUsers = mockUsers.filter(
     user =>
@@ -27,8 +53,6 @@ function MemberSelectionModal({ selectedUsers, setSelectedUsers, setShowAddUserM
     setSelectedUsers([...selectedUsers, newUser])
     setShowAddUserModal(false)
   }
-
-
 
   // Update user role
   const handleRoleChange = (userId, newRole) => {
@@ -75,7 +99,7 @@ function MemberSelectionModal({ selectedUsers, setSelectedUsers, setShowAddUserM
                         <li
                           key={user.id}
                           className='py-3 flex items-center justify-between hover:bg-neutral-50 cursor-pointer px-2 rounded'
-                          onClick={() => handleAddUser(user)}
+                          // onClick={() => handleAddUser(user)}
                         >
                           <div className='flex items-center'>
                             <img className='h-10 w-10 rounded-full' src={user.avatar} alt={user.name} />
@@ -87,7 +111,7 @@ function MemberSelectionModal({ selectedUsers, setSelectedUsers, setShowAddUserM
                               </p>
                             </div>
                           </div>
-                          <Button variant='tertiary' icon='Plus' size='sm'>
+                          <Button variant='tertiary' icon='Plus' size='sm' onClick={() => toggleMemberSelection(user)}>
                             Add
                           </Button>
                         </li>
