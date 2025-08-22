@@ -8,7 +8,7 @@ import LoginHeader from "./components/LoginHeader";
 import LoginFooter from "./components/LoginFooter";
 import LoginSidebar from "./components/LoginSidebar";
 import AuthOptions from "./components/AuthOptions";
-import { Navigator } from "components/helpers/Navigator";
+import { Navigator } from "helpers/Navigator";
 
 const LoginAuthentication = () => {
   const navigate = useNavigate();

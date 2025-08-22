@@ -1,22 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Link, Outlet, Route, Routes } from 'react-router-dom'
-import Header from '../../components/ui/Header'
-import Sidebar from '../../components/ui/Sidebar'
-import Button from '../../components/ui/Button'
-import Icon from '../../components/AppIcon'
+import React, { useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import ProjectList from './components/ProjectList'
 import ProjectDetails from './components/ProjectDetails'
-import TeamManagement from './components/TeamManagement'
-import PluginConfiguration from './components/PluginConfiguration'
-import LocationMap from './components/LocationMap'
-import BulkImport from './components/BulkImport'
-import ProjectTemplates from './components/ProjectTemplates'
-import AuditTrail from './components/AuditTrail'
-import AdvancedSettings from './components/AdvancedSettings'
 import ProjectManagementLayout from './ProjectManagementLayout'
 
 const ProjectManagementConfiguration = () => {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [activeTab, setActiveTab] = useState('projects')
   const [selectedProject, setSelectedProject] = useState(null)
   const [isCreatingProject, setIsCreatingProject] = useState(false)
