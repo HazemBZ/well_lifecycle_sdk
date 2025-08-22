@@ -1,100 +1,82 @@
 import React, { useState } from 'react'
 import Input from '../../../components/ui/Input'
 import Dropdown from '../../../components/ui/Dropdown'
-import Button from '../../../components/ui/Button'
+import * as Yup from 'yup'
+import { statusOptions, countryOptions } from './ProjectDetailsTabOptions'
+import { useFormikContext } from 'formik'
 
-function ProjectDetailsTab({ project, isCreating, wizardStep }) {
+const createPorjectSchema = Yup.object().shape({
+  projectname: Yup.string().required('Required'),
+  description: Yup.string(),
+  country: Yup.string().test(
+    'country-selected',
+    'country must be selected',
+    (value, ctx) => !(ctx.parent.projectionType === 'MANUAL' && !countries.find(el => el.code === ctx.parent.country))
+  ),
+  unitSystem: Yup.string().required(),
+  deadline: Yup.date(),
+  projectionType: Yup.string().required(),
+  projectionName: Yup.string(),
+  resampleStart: Yup.number(),
+  resampleStop: Yup.number(),
+  resampleStep: Yup.number(),
+  interpolation: Yup.string(),
+})
+
+// .post('projects/createproject/', data)
+
+function ProjectDetailsTab({ project, isCreating }) {
   // Handle project save
 
-  // Status options
-  const statusOptions = [
-    { value: 'planning', label: 'Planning', icon: 'Calendar' },
-    { value: 'active', label: 'Active', icon: 'Activity' },
-    { value: 'completed', label: 'Completed', icon: 'CheckCircle' },
-    { value: 'archived', label: 'Archived', icon: 'Archive' },
-  ]
-
-  // Project type options
-  const typeOptions = [
-    { value: 'exploration', label: 'Exploration', icon: 'Search' },
-    { value: 'development', label: 'Development', icon: 'Layers' },
-    { value: 'production', label: 'Production', icon: 'BarChart3' },
-    { value: 'abandonment', label: 'Abandonment', icon: 'XCircle' },
-    { value: 'research', label: 'Research', icon: 'Flask' },
-  ]
-
-  // Currency options
-  const currencyOptions = [
-    { value: 'USD', label: 'USD' },
-    { value: 'EUR', label: 'EUR' },
-    { value: 'GBP', label: 'GBP' },
-    { value: 'CAD', label: 'CAD' },
-    { value: 'AUD', label: 'AUD' },
-    { value: 'NOK', label: 'NOK' },
-    { value: 'SAR', label: 'SAR' },
-  ]
-
-  // Tag options
-  const tagOptions = [
-    { value: 'offshore', label: 'Offshore' },
-    { value: 'onshore', label: 'Onshore' },
-    { value: 'deepwater', label: 'Deepwater' },
-    { value: 'shallow', label: 'Shallow Water' },
-    { value: 'conventional', label: 'Conventional' },
-    { value: 'unconventional', label: 'Unconventional' },
-    { value: 'shale', label: 'Shale' },
-    { value: 'gas', label: 'Gas' },
-    { value: 'oil', label: 'Oil' },
-    { value: 'high-pressure', label: 'High Pressure' },
-    { value: 'high-temperature', label: 'High Temperature' },
-  ]
-
   // State for form fields
-  const [formData, setFormData] = useState({
-    name: project?.name || '',
-    description: project?.description || '',
-    status: project?.status
-      ? {
-          value: project.status,
-          label: project.status.charAt(0).toUpperCase() + project.status.slice(1),
-        }
-      : { value: 'planning', label: 'Planning' },
-    type: project?.type
-      ? {
-          value: project.type,
-          label: project.type.charAt(0).toUpperCase() + project.type.slice(1),
-        }
-      : { value: 'exploration', label: 'Exploration' },
-    startDate: project?.startDate || '',
-    endDate: project?.endDate || '',
-    budget: project?.budget || '',
-    currency: project?.currency
-      ? {
-          value: project.currency,
-          label: project.currency,
-        }
-      : { value: 'USD', label: 'USD' },
-    client: project?.client || '',
-    operator: project?.operator || '',
-    tags: project?.tags || [],
-  })
+  // const [formData, setFormData] = useState({
+  //   projectname: project?.name || '',
+  //   description: project?.description || '',
+  //   country: project?.country || '',
+  //   status: project?.status
+  //     ? {
+  //         value: project.status,
+  //         label: project.status.charAt(0).toUpperCase() + project.status.slice(1),
+  //       }
+  //     : { value: 'planning', label: 'Planning' },
+  //   type: project?.type
+  //     ? {
+  //         value: project.type,
+  //         label: project.type.charAt(0).toUpperCase() + project.type.slice(1),
+  //       }
+  //     : { value: 'exploration', label: 'Exploration' },
+  //   startDate: project?.startDate || '',
+  //   deadline: project?.deadline || project?.endDate || '',
+  //   budget: project?.budget || '',
+  //   currency: project?.currency
+  //     ? {
+  //         value: project.currency,
+  //         label: project.currency,
+  //       }
+  //     : { value: 'USD', label: 'USD' },
+  //   client: project?.client || '',
+  //   operator: project?.operator || '',
+  //   tags: project?.tags || [],
+  // })
 
-  // Handle input change
-  const handleInputChange = e => {
-    const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
-  }
+  // // Handle input change
+  // const handleInputChange = e => {
+  //   const { name, value } = e.target
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   })
+  // }
 
-  // Handle dropdown change
-  const handleDropdownChange = (name, value) => {
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
-  }
+  // // Handle dropdown change
+  // const handleDropdownChange = (name, value) => {
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   })
+  // }
+
+  const { values, handleChange, setValues } = useFormikContext()
 
   return (
     <>
@@ -117,41 +99,49 @@ function ProjectDetailsTab({ project, isCreating, wizardStep }) {
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <Input
               label='Project Name'
-              name='name'
-              value={formData.name}
-              onChange={handleInputChange}
+              name='projectname'
+              value={values.name}
+              onChange={handleChange}
               placeholder='Enter project name'
               required
             />
             <Dropdown
               label='Project Status'
+              name='projectStatus'
               options={statusOptions}
-              value={formData.status}
-              onChange={value => handleDropdownChange('status', value)}
+              value={values.projectStatus}
+              onChange={statObj => setValues(() => ({ ...values, projectStatus: statObj }))}
               required
             />
             <div className='md:col-span-2'>
               <Input
                 label='Description'
                 name='description'
-                value={formData.description}
-                onChange={handleInputChange}
+                value={values.description}
+                onChange={handleChange}
                 placeholder='Enter project description'
               />
             </div>
-            <Dropdown
+            {/* <Dropdown
               label='Project Type'
               options={typeOptions}
               value={formData.type}
               onChange={value => handleDropdownChange('type', value)}
-            />
-            <Dropdown
+            /> */}
+            {/* <Dropdown
               label='Tags'
               options={tagOptions}
               value={formData.tags}
               onChange={value => handleDropdownChange('tags', value)}
               multiple
               searchable
+            /> */}
+            <Dropdown
+              label='Country'
+              name='country'
+              options={countryOptions}
+              value={values.country}
+              onChange={countryObject => setValues(() => ({ ...values, country: countryObject }))}
             />
           </div>
         </div>
@@ -160,39 +150,39 @@ function ProjectDetailsTab({ project, isCreating, wizardStep }) {
         <div className='bg-neutral-50 p-4 rounded-md'>
           <h3 className='text-md font-medium text-neutral-900 mb-4'>Timeline and Budget</h3>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <Input
+            {/* <Input
               label='Start Date'
               name='startDate'
               type='date'
               value={formData.startDate}
               onChange={handleInputChange}
-            />
-            <Input label='End Date' name='endDate' type='date' value={formData.endDate} onChange={handleInputChange} />
+            /> */}
+            <Input label='End Date' name='deadline' type='date' value={values.deadline} onChange={handleChange} />
             <div className='flex space-x-4'>
               <div className='flex-1'>
-                <Input
+                {/* <Input
                   label='Budget'
                   name='budget'
                   type='number'
                   value={formData.budget}
                   onChange={handleInputChange}
                   placeholder='Enter budget amount'
-                />
+                /> */}
               </div>
               <div className='w-24'>
-                <Dropdown
+                {/* <Dropdown
                   label='Currency'
                   options={currencyOptions}
                   value={formData.currency}
                   onChange={value => handleDropdownChange('currency', value)}
-                />
+                /> */}
               </div>
             </div>
           </div>
         </div>
 
         {/* Organization */}
-        <div className='bg-neutral-50 p-4 rounded-md'>
+        {/* <div className='bg-neutral-50 p-4 rounded-md'>
           <h3 className='text-md font-medium text-neutral-900 mb-4'>Organization</h3>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <Input
@@ -210,17 +200,9 @@ function ProjectDetailsTab({ project, isCreating, wizardStep }) {
               placeholder='Enter operator name'
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Action buttons (only show when not in wizard mode) */}
-        {!isCreating && (
-          <div className='flex justify-end space-x-3'>
-            <Button variant='tertiary'>Cancel</Button>
-            <Button variant='primary' icon='Save'>
-              Save Changes
-            </Button>
-          </div>
-        )}
       </div>
     </>
   )
