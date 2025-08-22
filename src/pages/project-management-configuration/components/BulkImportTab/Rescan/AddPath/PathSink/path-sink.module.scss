@@ -1,0 +1,49 @@
+@import "scss/variables.scss";
+
+.sinkContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: $primary-color;
+  // padding: 10%;
+  box-sizing: border-box;
+  .content {
+    display: flex;
+    flex-direction: column;
+    border: 2px dashed white;
+    border-radius: 12px;
+    padding: 50px;
+    box-sizing: border-box;
+    justify-content: center;
+    height: 100%;
+  }
+
+  p {
+    color: white;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  span {
+    color: green;
+  }
+}
+
+.uploaderLabel {
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  border: none;
+  text-align: center;
+  transition: background 500ms ease;
+  cursor: pointer;
+  border-radius: 10px;
+  font-family: "Ropa Sans", sans-serif;
+  line-height: 1em;
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 2em;
+  background-color: hsl(116deg, 62%, 50%);
+}

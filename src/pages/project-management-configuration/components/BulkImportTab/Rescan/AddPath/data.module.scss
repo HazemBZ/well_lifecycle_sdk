@@ -1,0 +1,32 @@
+@import "scss/variables.scss";
+
+.dataSelectorContainer {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  width: 100%;
+  padding: 18px;
+  border: 0px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  &.error {
+    border: 2px solid $danger-color;
+  }
+
+  & > input {
+    width: 100%;
+    border: hidden;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  & > button {
+    border: none;
+    background: transparent;
+  }
+}
