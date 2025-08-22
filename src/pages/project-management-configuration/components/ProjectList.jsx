@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import Icon from "../../../components/AppIcon";
-import Button from "../../../components/ui/Button";
-import InputSearch from "../../../components/ui/InputSearch";
-import Dropdown from "../../../components/ui/Dropdown";
-import { mockProjects, sortOptions, statusOptions } from "../projectMockData";
+import React, { useState } from "react"
+import Icon from "../../../components/AppIcon"
+import Button from "../../../components/ui/Button"
+import InputSearch from "../../../components/ui/InputSearch"
+import Dropdown from "../../../components/ui/Dropdown"
+import { mockProjects, sortOptions, statusOptions } from "../projectMockData"
 
 const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
-  const [sortBy, setSortBy] = useState({ value: "updated", label: "Last Updated" });
-  const [filterStatus, setFilterStatus] = useState(null);
-  const [viewMode, setViewMode] = useState("grid");
-
+  const [sortBy, setSortBy] = useState({ value: "updated", label: "Last Updated" })
+  const [filterStatus, setFilterStatus] = useState(null)
+  const [viewMode, setViewMode] = useState("grid")
 
   // Filter projects based on search query and status
   const filteredProjects = mockProjects.filter(project => {
@@ -17,45 +16,43 @@ const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
       ? project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.location.toLowerCase().includes(searchQuery.toLowerCase())
-      : true;
-    
-    const matchesStatus = filterStatus && filterStatus.value !== "all"
-      ? project.status === filterStatus.value
-      : true;
-    
-    return matchesSearch && matchesStatus;
-  });
+      : true
+
+    const matchesStatus = filterStatus && filterStatus.value !== "all" ? project.status === filterStatus.value : true
+
+    return matchesSearch && matchesStatus
+  })
 
   // Sort projects
   const sortedProjects = [...filteredProjects].sort((a, b) => {
     switch (sortBy.value) {
       case "name":
-        return a.name.localeCompare(b.name);
+        return a.name.localeCompare(b.name)
       case "nameDesc":
-        return b.name.localeCompare(a.name);
+        return b.name.localeCompare(a.name)
       case "created":
-        return new Date(b.created) - new Date(a.created);
+        return new Date(b.created) - new Date(a.created)
       case "updated":
-        return new Date(b.updated) - new Date(a.updated);
+        return new Date(b.updated) - new Date(a.updated)
       case "wells":
-        return b.wells - a.wells;
+        return b.wells - a.wells
       default:
-        return 0;
+        return 0
     }
-  });
+  })
 
   // Format date
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    }).format(date);
-  };
+  const formatDate = dateString => {
+    const date = new Date(dateString)
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }).format(date)
+  }
 
   // Get status badge
-  const getStatusBadge = (status) => {
+  const getStatusBadge = status => {
     switch (status) {
       case "active":
         return (
@@ -63,43 +60,39 @@ const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
             <Icon name="Activity" size={12} className="mr-1" />
             Active
           </span>
-        );
+        )
       case "planning":
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-info-500 bg-opacity-10 text-info-600">
             <Icon name="Calendar" size={12} className="mr-1" />
             Planning
           </span>
-        );
+        )
       case "completed":
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-500 bg-opacity-10 text-neutral-600">
             <Icon name="CheckCircle" size={12} className="mr-1" />
             Completed
           </span>
-        );
+        )
       case "archived":
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-300 bg-opacity-20 text-neutral-500">
             <Icon name="Archive" size={12} className="mr-1" />
             Archived
           </span>
-        );
+        )
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   return (
     <div>
       {/* Toolbar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 space-y-4 md:space-y-0">
         <div className="w-full md:w-64">
-          <InputSearch
-            placeholder="Search projects..."
-            value={searchQuery}
-            onSearch={(query) => {}}
-          />
+          <InputSearch placeholder="Search projects..." value={searchQuery} onSearch={query => {}} />
         </div>
         <div className="flex items-center space-x-4">
           <Dropdown
@@ -110,23 +103,22 @@ const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
             icon="Filter"
             clearable
           />
-          <Dropdown
-            options={sortOptions}
-            value={sortBy}
-            onChange={setSortBy}
-            icon="ArrowUpDown"
-          />
+          <Dropdown options={sortOptions} value={sortBy} onChange={setSortBy} icon="ArrowUpDown" />
           <div className="flex border border-neutral-300 rounded-md">
             <button
-              className={`p-2 ${viewMode === 'grid' ? 'bg-neutral-100 text-neutral-800' : 'text-neutral-500 hover:text-neutral-700'}`}
-              onClick={() => setViewMode('grid')}
+              className={`p-2 ${
+                viewMode === "grid" ? "bg-neutral-100 text-neutral-800" : "text-neutral-500 hover:text-neutral-700"
+              }`}
+              onClick={() => setViewMode("grid")}
               aria-label="Grid view"
             >
               <Icon name="Grid" size={18} />
             </button>
             <button
-              className={`p-2 ${viewMode === 'list' ? 'bg-neutral-100 text-neutral-800' : 'text-neutral-500 hover:text-neutral-700'}`}
-              onClick={() => setViewMode('list')}
+              className={`p-2 ${
+                viewMode === "list" ? "bg-neutral-100 text-neutral-800" : "text-neutral-500 hover:text-neutral-700"
+              }`}
+              onClick={() => setViewMode("list")}
               aria-label="List view"
             >
               <Icon name="List" size={18} />
@@ -143,33 +135,29 @@ const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
           </div>
           <h3 className="text-lg font-medium text-neutral-900 mb-2">No projects found</h3>
           <p className="text-neutral-500 max-w-md mx-auto mb-6">
-            {searchQuery 
-              ? `No projects match your search "${searchQuery}". Try adjusting your search or filters.` 
+            {searchQuery
+              ? `No projects match your search "${searchQuery}". Try adjusting your search or filters.`
               : "You haven't created any projects yet. Get started by creating your first project."}
           </p>
-          <Button
-            variant="primary"
-            icon="Plus"
-            onClick={onCreateProject}
-          >
+          <Button variant="primary" icon="Plus" onClick={onCreateProject}>
             Create New Project
           </Button>
         </div>
       )}
 
       {/* Grid view */}
-      {sortedProjects.length > 0 && viewMode === 'grid' && (
+      {sortedProjects.length > 0 && viewMode === "grid" && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {sortedProjects.map((project) => (
-            <div 
+          {sortedProjects.map(project => (
+            <div
               key={project.id}
               className="bg-white border border-neutral-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200 cursor-pointer"
               onClick={() => onSelectProject(project)}
             >
               <div className="h-40 overflow-hidden">
-                <img 
-                  src={project.thumbnail} 
-                  alt={project.name} 
+                <img
+                  //src={project.thumbnail}
+                  alt={project.name}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -203,34 +191,52 @@ const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
       )}
 
       {/* List view */}
-      {sortedProjects.length > 0 && viewMode === 'list' && (
+      {sortedProjects.length > 0 && viewMode === "list" && (
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-neutral-200">
             <thead className="bg-neutral-50">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
                   Project
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
                   Location
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
                   Status
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
                   Wells
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
                   Team
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
                   Last Updated
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-neutral-200">
-              {sortedProjects.map((project) => (
-                <tr 
+              {sortedProjects.map(project => (
+                <tr
                   key={project.id}
                   className="hover:bg-neutral-50 cursor-pointer"
                   onClick={() => onSelectProject(project)}
@@ -238,11 +244,7 @@ const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-10 w-10 flex-shrink-0 rounded overflow-hidden">
-                        <img 
-                          src={project.thumbnail} 
-                          alt={project.name} 
-                          className="h-10 w-10 object-cover"
-                        />
+                        <img src={project.thumbnail} alt={project.name} className="h-10 w-10 object-cover" />
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-neutral-900">{project.name}</div>
@@ -250,18 +252,10 @@ const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
-                    {project.location}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {getStatusBadge(project.status)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
-                    {project.wells}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
-                    {project.team}
-                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">{project.location}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(project.status)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">{project.wells}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">{project.team}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
                     {formatDate(project.updated)}
                   </td>
@@ -272,7 +266,7 @@ const ProjectList = ({ onSelectProject, onCreateProject, searchQuery }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ProjectList;
+export default ProjectList
