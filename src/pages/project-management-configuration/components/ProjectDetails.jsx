@@ -15,55 +15,6 @@ import * as Yup from 'yup'
 import Button from 'components/ui/Button'
 import axios from 'axios'
 
-// TODO: Implement the actual save logic
-// const handleSubmission = (
-//   {
-//     projectionType,
-//     projectionName,
-//     resampleStart,
-//     resampleStop,
-//     resampleStep,
-//     resampleType,
-//     interpolation,
-//     ...restVaues
-//   },
-//   actions
-// ) => {
-//   if (paths.length + Object.keys(associatedPaths).length === 0) {
-//     setErrorPath(true)
-//     actions.setSubmitting(false)
-//     confirmModal.hide()
-//     return
-//   }
-//   const data = {
-//     ...restVaues,
-//     projection_kind: projectionType,
-//     projection_value: projectionName,
-//     list_path: JSON.stringify(paths),
-//     associated_files: JSON.stringify(Object.keys(associatedPaths)),
-//     unitSystem,
-//     members: members.map(({ id, role }) => ({ id: id, role: role })),
-//     resample: {
-//       resampleType,
-//       resampleStart,
-//       resampleStop,
-//       resampleStep,
-//       interpolation,
-//     },
-//   }
-
-//   return axios
-//     .post('projects/createproject/', data)
-//     .then(() => {
-//       actions.resetForm()
-//       resetNonFormData()
-//       navigate('/projects')
-//     })
-//     .catch(() => {
-//       // TODO: handle exception
-//     })
-// }
-
 const createPorjectSchema = Yup.object().shape({
   projectname: Yup.string().required('Required'),
   description: Yup.string(),
@@ -91,64 +42,6 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
   const unitSystem = 'Metric system'
   const members = [{ id: 1, role: 'Manager' }] // This should be replaced with actual member data
 
-  // const handleSaveProject = () => {
-  //   // In a real application, this would save the project to the backend
-  //   setIsCreatingProject(false)
-  //   setActiveTab('projects')
-  // }
-
-  // State for form fields
-  const [formData, setFormData] = useState({
-    name: project?.name || '',
-    description: project?.description || '',
-    status: project?.status
-      ? {
-          value: project.status,
-          label: project.status.charAt(0).toUpperCase() + project.status.slice(1),
-        }
-      : { value: 'planning', label: 'Planning' },
-    type: project?.type
-      ? {
-          value: project.type,
-          label: project.type.charAt(0).toUpperCase() + project.type.slice(1),
-        }
-      : { value: 'exploration', label: 'Exploration' },
-    startDate: project?.startDate || '',
-    endDate: project?.endDate || '',
-    budget: project?.budget || '',
-    currency: project?.currency
-      ? {
-          value: project.currency,
-          label: project.currency,
-        }
-      : { value: 'USD', label: 'USD' },
-    client: project?.client || '',
-    operator: project?.operator || '',
-    tags: project?.tags || [],
-  })
-
-  // Handle input change
-  // const handleInputChange = e => {
-  //   const { name, value } = e.target
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   })
-  // }
-
-  // Handle dropdown change
-  // const handleDropdownChange = (name, value) => {
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   })
-  // }
-
-  // Handle search
-  // const handleSearch = query => {
-  //   setSearchQuery(query)
-  // }
-
   // Handle project selection
   const handleProjectSelect = project => {
     setSelectedProject(project)
@@ -162,39 +55,6 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
     setCurrentWizardStep(1)
     setActiveTab('details')
   }
-
-  // Handle wizard navigation
-  // const handleNextStep = () => {
-  //   if (currentWizardStep < 4) {
-  //     setCurrentWizardStep(currentWizardStep + 1)
-
-  //     // Map wizard steps to tabs
-  //     const tabMapping = {
-  //       1: 'details',
-  //       2: 'team',
-  //       3: 'plugins',
-  //       4: 'location',
-  //     }
-
-  //     setActiveTab(tabMapping[currentWizardStep + 1])
-  //   }
-  // }
-
-  // const handlePreviousStep = () => {
-  //   if (currentWizardStep > 1) {
-  //     setCurrentWizardStep(currentWizardStep - 1)
-
-  //     // Map wizard steps to tabs
-  //     const tabMapping = {
-  //       1: 'details',
-  //       2: 'team',
-  //       3: 'plugins',
-  //       4: 'location',
-  //     }
-
-  //     setActiveTab(tabMapping[currentWizardStep - 1])
-  //   }
-  // }
 
   // Handle tab change
   const handleTabChange = tab => {
@@ -215,7 +75,6 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
     }
   }
 
-  // TODO: submit country code not the entire object
   const handleSubmission = (
     {
       projectionType,
@@ -230,12 +89,6 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
     },
     actions
   ) => {
-    // console.log('Form submitted with values:', values)
-    // Here you would typically send the data to your backend
-    // For now, just log it and reset the form
-    // actions.setSubmitting(false)
-    // actions.resetForm()
-
     const paths = []
     const associatedPaths = {}
 
@@ -267,55 +120,6 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
       })
   }
 
-  // TODO: Implement the actual save logic
-  // const handleSubmission = (
-  //   {
-  //     projectionType,
-  //     projectionName,
-  //     resampleStart,
-  //     resampleStop,
-  //     resampleStep,
-  //     resampleType,
-  //     interpolation,
-  //     ...restVaues
-  //   },
-  //   actions
-  // ) => {
-  //   if (paths.length + Object.keys(associatedPaths).length === 0) {
-  //     setErrorPath(true)
-  //     actions.setSubmitting(false)
-  //     confirmModal.hide()
-  //     return
-  //   }
-  //   const data = {
-  //     ...restVaues,
-  //     projection_kind: projectionType,
-  //     projection_value: projectionName,
-  //     list_path: JSON.stringify(paths),
-  //     associated_files: JSON.stringify(Object.keys(associatedPaths)),
-  //     unitSystem,
-  //     members: members.map(({ id, role }) => ({ id: id, role: role })),
-  //     resample: {
-  //       resampleType,
-  //       resampleStart,
-  //       resampleStop,
-  //       resampleStep,
-  //       interpolation,
-  //     },
-  //   }
-
-  // return axios
-  //   .post('projects/createproject/', data)
-  //   .then(() => {
-  //     actions.resetForm()
-  //     resetNonFormData()
-  //     navigate('/projects')
-  //   })
-  //   .catch(() => {
-  //     // TODO: handle exception
-  //   })
-  // }
-
   return (
     <Formik
       initialValues={{
@@ -337,7 +141,13 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
       onSubmit={handleSubmission}
     >
       {({ values, submitForm, isSubmitting }) => (
-        <Form>
+        <Form
+          onSubmit={e => {
+            e.preventDefault()
+            e.stopPropagation()
+            console.log('submit')
+          }}
+        >
           <>
             <div className='border-b border-neutral-200'>
               <nav className='flex -mb-px'>
@@ -347,6 +157,7 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
                       ? 'border-primary-500 text-primary-600'
                       : 'border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300'
                   }`}
+                  type='button'
                   onClick={() => handleTabChange('details')}
                 >
                   <div className='flex items-center'>
@@ -380,71 +191,6 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
                     Bulk Import
                   </div>
                 </button>
-                {/* <button
-                  className={`px-4 py-3 text-sm font-medium border-b-2 ${
-                    activeTab === 'plugins'
-                      ? 'border-primary-500 text-primary-600'
-                      : 'border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300'
-                  }`}
-                  onClick={() => handleTabChange('plugins')}
-                >
-                  <div className='flex items-center'>
-                    <Icon name='Puzzle' size={16} className='mr-2' />
-                    Plugin Configuration
-                  </div>
-                </button> */}
-                {/* <button
-                  className={`px-4 py-3 text-sm font-medium border-b-2 ${
-                    activeTab === 'location'
-                      ? 'border-primary-500 text-primary-600'
-                      : 'border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300'
-                  }`}
-                  onClick={() => handleTabChange('location')}
-                >
-                  <div className='flex items-center'>
-                    <Icon name='MapPin' size={16} className='mr-2' />
-                    Location
-                  </div>
-                </button> */}
-                {/* <button
-                  className={`px-4 py-3 text-sm font-medium border-b-2 ${
-                    activeTab === 'templates'
-                      ? 'border-primary-500 text-primary-600'
-                      : 'border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300'
-                  }`}
-                  onClick={() => handleTabChange('templates')}
-                >
-                  <div className='flex items-center'>
-                    <Icon name='Copy' size={16} className='mr-2' />
-                    Templates
-                  </div>
-                </button> */}
-                {/* <button
-                  className={`px-4 py-3 text-sm font-medium border-b-2 ${
-                    activeTab === 'audit'
-                      ? 'border-primary-500 text-primary-600'
-                      : 'border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300'
-                  }`}
-                  onClick={() => handleTabChange('audit')}
-                >
-                  <div className='flex items-center'>
-                    <Icon name='History' size={16} className='mr-2' />
-                    Audit Trail
-                  </div>
-                </button> */}
-                {/* <button
-                  className={`px-4 py-3 text-sm font-medium border-b-2 ${
-                    activeTab === 'settings'
-                      ? 'border-primary-500 text-primary-600'
-                      : 'border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300'
-                  }`}
-                  onClick={() => handleTabChange('settings')}
-                >
-                  <div className='flex items-center'>
-                    <Icon name='Settings' size={16} className='mr-2' />
-                    Advanced Settings
-                  </div>
-                </button> */}
               </nav>
             </div>
 
@@ -575,12 +321,17 @@ const ProjectDetails = ({ project, isCreating, wizardStep }) => {
 
               {/* Action buttons */}
               <div className='flex justify-end space-x-3'>
-                <Button variant='tertiary'>Cancel</Button>
+                <Button variant='tertiary' type='button'>
+                  Cancel
+                </Button>
                 <Button
                   variant='primary'
                   icon='Save'
-                  onClick={() => {
+                  type='submit'
+                  onClick={e => {
                     console.log('Values:', values)
+                    e.preventDefault()
+                    e.stopPropagation()
                     submitForm()
                   }}
                 >
