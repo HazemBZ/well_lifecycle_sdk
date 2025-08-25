@@ -8,6 +8,7 @@ const InputSearch = ({
   className = '',
   size = 'md',
   isForm = true,
+  name = null,
   ...props
 }) => {
   const [searchValue, setSearchValue] = useState(initialValue)
@@ -30,6 +31,7 @@ const InputSearch = ({
   // Handle input change
   const handleChange = e => {
     setSearchValue(e.target.value)
+    if (onSearch) onSearch(e.target.value)
   }
 
   // Handle search submission
@@ -66,6 +68,7 @@ const InputSearch = ({
             </div>
             <input
               type='text'
+              name={name}
               className={`block w-full rounded-md border border-neutral-300 bg-white shadow-sm focus:border-primary-500 focus:ring-primary-500 focus:outline-none ${sizeClasses[size]}`}
               placeholder={placeholder}
               value={searchValue}
@@ -102,6 +105,7 @@ const InputSearch = ({
           </div>
           <input
             type='text'
+            name={name}
             className={`block w-full rounded-md border border-neutral-300 bg-white shadow-sm focus:border-primary-500 focus:ring-primary-500 focus:outline-none ${sizeClasses[size]}`}
             placeholder={placeholder}
             value={searchValue}
